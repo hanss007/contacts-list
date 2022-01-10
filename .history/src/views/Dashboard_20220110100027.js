@@ -1,0 +1,22 @@
+import React, { useStete, useContext } from 'react';
+import styled from 'styled-components';
+import UsersList from '../components/organisms/UsersList/UsersList';
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  font-size: 20px;
+`;
+
+const Dashboard = () => {
+  return (
+    <Wrapper>
+      <UsersList />
+    </Wrapper>
+  );
+};
+
+export default Dashboard;
