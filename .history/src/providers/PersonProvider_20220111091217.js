@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import apiData from '../api';
-import apiAllData from '../apiAll';
+import mockData from '../data/mockData.json';
 
 export const PersonContext = React.createContext({
   data: [],
@@ -17,19 +17,6 @@ const UsersProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const lastFetchedPage = useRef(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [allData, setAllData] = useState([]);
-
-  useEffect(() => {
-    apiAllData().then((newData) => {
-      setAllData(newData);
-      setAllData([...allData, ...newData]);
-    });
-  }, []);
-  console.log(allData.length);
-
-  const addCard = () => {
-    setCursor((prevState) => prevState + 1);
-  };
 
   const fetchData = () => {
     setErrorMessage(null);
@@ -56,15 +43,15 @@ const UsersProvider = ({ children }) => {
 
   const handleAddPerson = (values) => {
     const newPerson = {
-      id: (allData.length + 1).toString(),
+      id: (mockData.length + 1).toString(),
       jobTitle: values.jobTitle,
       emailAddress: values.emailAddress,
       firstNameLastName: values.firstNameLastName,
     };
 
-    setAllData([...allData, newPerson]);
+    setData([...data, newPerson]);
   };
-  console.log('all', allData);
+
   return (
     <PersonContext.Provider
       value={{

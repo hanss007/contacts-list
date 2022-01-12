@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import apiData from '../api';
+import mockData from '../data/mockData.json';
 import apiAllData from '../apiAll';
 
 export const PersonContext = React.createContext({
@@ -64,7 +65,7 @@ const UsersProvider = ({ children }) => {
 
     setAllData([...allData, newPerson]);
   };
-  console.log('all', allData);
+  console.log('all', data);
   return (
     <PersonContext.Provider
       value={{

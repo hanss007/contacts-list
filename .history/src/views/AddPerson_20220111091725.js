@@ -3,6 +3,7 @@ import { ViewWrapper } from 'components/molecules/ViewWrapper/ViewWrapper';
 import FromField from '../components/molecules/FormField/FormField';
 import styled from 'styled-components';
 import { PersonContext } from '../providers/PersonProvider';
+
 import { ButtonSubmit } from 'components/atoms/Submit';
 
 const initialFormState = {
@@ -29,8 +30,12 @@ const Title = styled.h3`
 const AddPerson = () => {
   const [formValues, setFormValues] = useState(initialFormState);
   const { handleAddPerson } = useContext(PersonContext);
+  const [allData, setAllData] = useState([]);
 
-  // jezeli chce dodac to nowy kontakt dodaje do allData , sprobowac przy uzyciu useReducer i tam 2 case jedno pobieranie a drugie to dodawanie nowego kontaktu
+  useEffect(() => {
+    fetch('/src/data/mockData.json').then((res) => setAllData(res.allData));
+  }, []);
+  console.log(allData);
 
   const handleInputChange = (e) => {
     setFormValues({
@@ -46,35 +51,33 @@ const AddPerson = () => {
   };
 
   return (
-    <>
-      <ViewWrapper as="form" onSubmit={handlerSubmitPerson}>
-        <Wrapper>
-          <Title>Add new person</Title>
-          <FromField
-            label="firstNameLastName"
-            id="firstNameLastName"
-            name="firstNameLastName"
-            value={formValues.firstNameLastName}
-            onChange={handleInputChange}
-          />
-          <FromField
-            label="jobTitle"
-            id="jobTitle"
-            name="jobTitle"
-            value={formValues.jobTitle}
-            onChange={handleInputChange}
-          />
-          <FromField
-            label="emailAddress"
-            id="emailAddress"
-            name="emailAddress"
-            value={formValues.emailAddress}
-            onChange={handleInputChange}
-          />
-          <ButtonSubmit type="submit">Add</ButtonSubmit>
-        </Wrapper>
-      </ViewWrapper>
-    </>
+    <ViewWrapper as="form" onSubmit={handlerSubmitPerson}>
+      <Wrapper>
+        <Title>Add new person</Title>
+        <FromField
+          label="firstNameLastName"
+          id="firstNameLastName"
+          name="firstNameLastName"
+          value={formValues.firstNameLastName}
+          onChange={handleInputChange}
+        />
+        <FromField
+          label="jobTitle"
+          id="jobTitle"
+          name="jobTitle"
+          value={formValues.jobTitle}
+          onChange={handleInputChange}
+        />
+        <FromField
+          label="emailAddress"
+          id="emailAddress"
+          name="emailAddress"
+          value={formValues.emailAddress}
+          onChange={handleInputChange}
+        />
+        <ButtonSubmit type="submit">Add</ButtonSubmit>
+      </Wrapper>
+    </ViewWrapper>
   );
 };
 

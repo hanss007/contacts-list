@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import apiData from '../api';
+import mockData from '../data/mockData.json';
 import apiAllData from '../apiAll';
 
 export const PersonContext = React.createContext({
@@ -19,13 +20,13 @@ const UsersProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [allData, setAllData] = useState([]);
 
-  useEffect(() => {
-    apiAllData().then((newData) => {
-      setAllData(newData);
-      setAllData([...allData, ...newData]);
-    });
-  }, []);
-  console.log(allData.length);
+  // useEffect(() => {
+  //   apiAllData().then((newData) => {
+  //     setAllData(newData);
+  //     setAllData([...allData, ...newData]);
+  //   });
+  // }, []);
+  // console.log(allData.length);
 
   const addCard = () => {
     setCursor((prevState) => prevState + 1);
@@ -62,9 +63,9 @@ const UsersProvider = ({ children }) => {
       firstNameLastName: values.firstNameLastName,
     };
 
-    setAllData([...allData, newPerson]);
+    setData([...data, newPerson]);
   };
-  console.log('all', allData);
+
   return (
     <PersonContext.Provider
       value={{

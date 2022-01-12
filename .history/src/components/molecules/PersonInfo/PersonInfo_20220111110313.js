@@ -27,7 +27,7 @@ const InnerWrapper = styled.div`
 const PersonInfo = ({ onSelect, selected, data, data: { id } }) => {
   return (
     <WrapperPerson
-      onClick={() => onSelect(id)}
+      onClick={() => onSelect(personInfo.id)}
       className={selected.includes(id) ? 'active' : ''}
     >
       <InnerWrapper>{data.firstNameLastName}</InnerWrapper>
